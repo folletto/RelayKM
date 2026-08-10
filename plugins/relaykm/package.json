@@ -1,0 +1,10 @@
+{
+  "name": "@relaykm/plugin",
+  "version": "0.1.0",
+  "private": true,
+  "description": "RelayKM Claude Code plugin: MCP filesystem server and session-start hook.",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  }
+}
