@@ -9,9 +9,14 @@
   "plugins": [
     {
       "name": "relaykm",
-      "source": "./plugins/relaykm",
+      "source": "./",
       "description": "Sandboxed filesystem MCP server over the RelayKM knowledge base, plus automatic AGENTS.md loading at session start.",
-      "keywords": ["pkm", "notes", "filesystem", "mcp"]
+      "keywords": [
+        "pkm",
+        "notes",
+        "filesystem",
+        "mcp"
+      ]
     }
   ]
 }
