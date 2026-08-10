@@ -10,7 +10,7 @@
 import fsp from 'node:fs/promises';
 import path from 'node:path';
 
-import { RPC, RpcError, log, serve } from '../lib/rpc.js';
+import { RPC, RpcError, log, serve } from './rpc.js';
 import {
   AGENTS_FILE,
   DEFAULT_MAX_READ_BYTES,

@@ -83,26 +83,25 @@ this repo ships exactly one plugin.
 hooks/
 ├── hooks.json           SessionStart registration
 └── session-start.js     AGENTS.md injection
+mcp/
+├── server.js            tool definitions and handlers
+└── rpc.js               JSON-RPC 2.0 stdio transport
 lib/
-├── rpc.js               JSON-RPC 2.0 stdio transport
 └── store.js             root resolution and path sandbox
-mcp/server.js            tool definitions and handlers
 ```
 
-One consequence of the plugin living at the repository root: `.mcp.json` is also
-where Claude Code looks for a repo's *project* MCP config. Opening RelayKM in
-Claude Code to work on it will therefore offer to enable `relaykm-fs` as a
-project server, where `${CLAUDE_PLUGIN_ROOT}` is undefined and the server would
-not start. Project MCP servers are opt-in, so this is a prompt to decline rather
-than a broken server. Declining does not affect the installed plugin, which
-resolves the path through the plugin runtime.
+There are two entry points — the MCP server and the hook — and each owns its
+directory. `lib/` holds only what both of them need: the hook resolves the same
+knowledge base root as the server so it can read `AGENTS.md` from it. Anything
+used by a single entry point lives with that entry point, which is why the
+JSON-RPC transport sits in `mcp/` rather than `lib/`.
 
 ## Development
 
 The server speaks MCP's stdio transport directly rather than depending on
 `@modelcontextprotocol/sdk`, which is what lets the plugin work the instant it is
 enabled — no `npm install`, no network. The protocol surface is small
-(`initialize`, `tools/list`, `tools/call`, `ping`) and lives in `lib/rpc.js`; swap
+(`initialize`, `tools/list`, `tools/call`, `ping`) and lives in `mcp/rpc.js`; swap
 in the SDK there if the server outgrows it.
 
 Drive the server by hand:
