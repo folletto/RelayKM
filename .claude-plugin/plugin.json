@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "relaykm",
+  "displayName": "RelayKM",
+  "version": "0.1.0",
+  "description": "Sandboxed filesystem access to the RelayKM knowledge base, plus automatic AGENTS.md loading at session start.",
+  "author": {
+    "name": "Folletto"
+  },
+  "repository": "https://github.com/folletto/RelayKM",
+  "license": "MIT",
+  "keywords": ["pkm", "notes", "filesystem", "mcp"]
+}
