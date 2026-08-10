@@ -118,7 +118,30 @@ then paste newline-delimited JSON-RPC frames on stdin:
 {"jsonrpc":"2.0","id":3,"method":"tools/call","params":{"name":"list_folder","arguments":{"path":"."}}}
 ```
 
-Validate the manifests:
+### Tests
+
+```bash
+npm test
+```
+
+89 tests on Node's built-in runner, no dependencies. Each test gets its own
+knowledge base under a temp directory via `RELAYKM_ROOT`, so the suite never
+touches `~/Documents`.
+
+| File | Covers |
+| :--- | :--- |
+| `test/store.test.js` | Root resolution and the path sandbox, as unit tests |
+| `test/server.test.js` | The MCP server end to end, over its real stdio transport |
+| `test/hook.test.js` | Context injection, once-per-conversation, and failure modes |
+
+`test/helpers/mcp-client.js` holds a small JSON-RPC client that spawns the real
+server and matches responses to requests by id, plus a runner for the hook.
+
+The suite is checked by mutation: disabling the containment check in
+`assertInside` fails 19 tests, making the session marker non-exclusive fails 3,
+and removing the binary-file guard fails 2.
+
+### Validating the manifests
 
 ```bash
 claude plugin validate .
