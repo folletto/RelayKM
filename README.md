@@ -78,7 +78,8 @@ this repo ships exactly one plugin.
 ```
 .claude-plugin/
 ├── marketplace.json     marketplace catalog (source: "./")
-└── plugin.json          plugin manifest, with the MCP server declared inline
+└── plugin.json          plugin manifest
+.mcp.json                MCP server registration
 hooks/
 ├── hooks.json           SessionStart registration
 └── session-start.js     AGENTS.md injection
@@ -88,12 +89,13 @@ lib/
 mcp/server.js            tool definitions and handlers
 ```
 
-The MCP server is declared inline in `plugin.json` rather than in a `.mcp.json`
-file. With the plugin at the repository root, a root `.mcp.json` would also be
-read as this repo's *project* MCP config whenever someone opens RelayKM in
-Claude Code to work on it — and `${CLAUDE_PLUGIN_ROOT}` is undefined in that
-context, so the server would fail to start. Declaring it inline keeps the plugin
-config from colliding with project config.
+One consequence of the plugin living at the repository root: `.mcp.json` is also
+where Claude Code looks for a repo's *project* MCP config. Opening RelayKM in
+Claude Code to work on it will therefore offer to enable `relaykm-fs` as a
+project server, where `${CLAUDE_PLUGIN_ROOT}` is undefined and the server would
+not start. Project MCP servers are opt-in, so this is a prompt to decline rather
+than a broken server. Declining does not affect the installed plugin, which
+resolves the path through the plugin runtime.
 
 ## Development
 

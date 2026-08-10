@@ -9,11 +9,5 @@
   },
   "repository": "https://github.com/folletto/RelayKM",
   "license": "MIT",
-  "keywords": ["pkm", "notes", "filesystem", "mcp"],
-  "mcpServers": {
-    "relaykm-fs": {
-      "command": "node",
-      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp/server.js"]
-    }
-  }
+  "keywords": ["pkm", "notes", "filesystem", "mcp"]
 }
